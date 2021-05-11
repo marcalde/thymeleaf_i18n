@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title th:text="#{title.riepilogo}"></title>
+</head>
+<body>
+	<div>
+		<form th:action="@{/API/prenotaz}" method="GET">
+			<tr>
+				<td th:text="#{lang.cambia}"></td>
+				<td><select name="lang">
+						<option value="it" th:text="#{lang.it}"></option>
+						<option value="en" th:text="#{lang.en}"></option>
+				</select> <input type="submit" th:value="#{lang.traduci}" /></td>
+				<td></td>
+			</tr>
+		</form>
+	</div>
+	<div align="center">
+		<form th:action="@{/API/prenotaz}" th:object="${prenotazioneEntity}"
+			method="POST">
+			<table>
+				<tr>
+					<td colspan="2" align="center"><h2
+							th:text="#{label.registrazione}"></h2></td>
+				</tr>
+				<tr>
+					<td><input hidden type="number" th:field="*{id}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{label.nome}"></td>
+					<td><input type="text" th:field="*{name}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{label.cognome}"></td>
+					<td><input type="text" th:field="*{surname}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{label.mail}"></td>
+					<td><input type="text" th:field="*{email}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{label.eta}"></td>
+					<td><input type="number" th:field="*{age}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{label.citta}"></td>
+					<td><select th:field="*{city}">
+							<option th:each="cit : ${cities}" th:value="${cit.id}"
+								th:text="${cit.citta}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						th:value="#{button.prenota}" /></td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
+</body>
+</html>
